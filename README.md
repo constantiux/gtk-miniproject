@@ -10,9 +10,9 @@ Before you begin, make sure you have a Github account, and a Repl.it account. Th
 
 1. In the `repl.it` terminal, do each
 
-	curl $REPLIT_DB_URL -d 'gitemail=value1'
-	curl $REPLIT_DB_URL -d 'gitname=value2'
-	curl $REPLIT_DB_URL -d 'gitauth=value3'
+		curl $REPLIT_DB_URL -d 'gitemail=value1'
+		curl $REPLIT_DB_URL -d 'gitname=value2'
+		curl $REPLIT_DB_URL -d 'gitauth=value3'
 
  where
 
