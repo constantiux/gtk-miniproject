@@ -23,11 +23,23 @@ Before you begin, make sure you have a Github account, and a Repl.it account. Th
 2. Create your first Github repo (either public or private), and get the repo url _e.g._ `https://github.com/your-username/example-repo-name.git`
 
 
-3. In the Repl.it terminal, run the following
+3. In the `repl.it` terminal, run the following
 
 		git init
 		git branch -M main
 		git remote add origin https://github.com/your-username/example-repo-name.git
+		git add .
+		git commit -m "first init"
+		git push -u origin main
+
+4. In the `linux03` server, run
+
+		git config --global user.email "yourGithubEmail@address.com"
+		git config --global user.name "yourGithubUsername"
+		git config --global credential.helper store
+		git clone https://github.com/your-username/example-repo-name.git
+		*) Then enter your username and token (only for this one time)
+		cd example-repo-name
 
 
 ### Resuming your work
@@ -39,3 +51,8 @@ After changing any file, and ready to test on the `linux03` server, then only ne
 	git add .
 	git commit -m "update"
 	git push -u origin main
+
+Next, in the `linux03` server, we just need to
+
+	cd your/repository/folder/here
+	git pull
