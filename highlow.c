@@ -100,7 +100,7 @@ void end_game(){
 		sprintf(results, "South wins.\nNorth's score : %d, South's score: %d", status[1], status[2]);
 	}
 
-    set_prompt(results); // update prompt with message in `results`
+    set_prompt(results); // update prompt with message in `results` array
     /************CODE END***************/
 }
 
