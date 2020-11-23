@@ -161,8 +161,8 @@ void on_click_hint(GtkWidget *widget, gpointer window) {
 		if (card_deck[i] < last_card) lower++;
 	}
 
-	sprintf(buffer, "Remaining cards: %d"
-					"No. of cards higher than opponent\'s last card: %d"
+	sprintf(buffer, "Remaining cards: %d\n"
+					"No. of cards higher than opponent\'s last card: %d\n"
 					"No. of cards lower than opponent\'s last card: %d",
 					remaining,
 					higher,

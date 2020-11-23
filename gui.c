@@ -122,6 +122,9 @@ void quit_game(GtkWindow * window) {
 			gtk_widget_destroy(dialog);
 			gtk_widget_destroy(GTK_WIDGET(window));
 			break;
+		default:
+			gtk_widget_destroy(dialog);
+			break;
     }
     /************CODE END***************/
 }
