@@ -14,17 +14,9 @@ GtkWidget *button_higher;
 GtkWidget *button_lower;
 GtkWidget *button_new;
 GtkWidget *button_quit;
-GtkWidget *button_pass; //della
 //GtkWidget *button_hint;
 GtkWidget *text_prompt;
 GtkTextBuffer *buffer_prompt;
-
-void on_click_higher();
-void on_click_lower();
-//void on_click_hint();
-void new_game();
-
-
 
 
 void clear_child(GtkWidget* container){
@@ -51,16 +43,12 @@ void show_ingame_buttons(){
     gtk_widget_show(button_higher);
     gtk_widget_show(button_lower);
     //gtk_widget_show(button_hint);
-	//della
-	gtk_widget_show(button_pass);
 }
 
 void hide_ingame_buttons(){
     gtk_widget_hide(button_higher);
     gtk_widget_hide(button_lower);
     //gtk_widget_hide(button_hint);
-	//della
-	gtk_widget_hide(button_pass);
 }
 
 void swap(int *a, int *b){
