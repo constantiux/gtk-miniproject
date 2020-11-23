@@ -119,10 +119,10 @@ void quit_game(GtkWindow * window) {
 	switch (result)
 	{
 		case GTK_RESPONSE_YES:
+			gtk_widget_destroy(dialog);
 			gtk_widget_destroy(GTK_WIDGET(window));
 			break;
 	}
-	gtk_widget_destroy(dialog);
     /************CODE END***************/
 }
 
