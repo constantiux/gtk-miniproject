@@ -106,16 +106,15 @@ void add_image(int container_id, int card) {
 void quit_game(GtkWindow * window) {
 	/************CODE HERE**************/
     // close the game
-	GtkWidget *dialog;
 	GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT;
-	dialog = gtk_dialog_new_with_buttons ("My dialog",
-										window,
-										flags,
-										_("_OK"),
-										GTK_RESPONSE_ACCEPT,
-										_("_Cancel"),
-										GTK_RESPONSE_REJECT,
-										NULL);
+	GtkWidget *dialog = gtk_dialog_new_with_buttons ("My dialog",
+													window,
+													flags,
+													GTK_STOCK_OK,
+													GTK_RESPONSE_ACCEPT,
+													GTK_STOCK_CANCEL,
+													GTK_RESPONSE_REJECT,
+													NULL);
 
 	int result = gtk_dialog_run (GTK_DIALOG (dialog));
 	switch (result)
