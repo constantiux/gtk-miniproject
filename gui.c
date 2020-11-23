@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <gtk/gtk.h>
+//#include <gtk/gtk.h>
 #include "gui.h"
 
 GtkWidget *button_higher;

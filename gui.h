@@ -1,3 +1,5 @@
+#include <gtk/gtk.h>
+
 void clear_child(GtkWidget* container);
 void clear_container(int container_id);
 void set_prompt(char *);
