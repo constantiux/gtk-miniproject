@@ -1,13 +1,7 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include <gtk/gtk.h>
-void clear_child(GtkWidget* container);
-void clear_container(int container_id);
-void set_prompt(char *);
-void show_ingame_buttons();
-void hide_ingame_buttons();
-char* get_image_path(int card);
-void add_image(int container_id, int card);
-void quit_game(GtkWindow *window);
-void activate (GtkApplication *app, gpointer user_data);
+#include "gui.h"
 
 GtkWidget *button_higher;
 GtkWidget *frame_box;
@@ -64,9 +58,36 @@ void hide_ingame_buttons(){
     //gtk_widget_hide(button_hint);
 }
 
+void swapcard(int *cards, int a, int b){
+	int tmp = *cards[a];
+	*array[a] = *card[b];
+	*array[b] = tmp;
+}
+
 char* get_image_path(int card){
     /************CODE HERE**************/
-    
+    char *path = malloc(20);
+
+	int bound = ((card / 4) * 4 + 4) % 52;
+	int pos = card % 4;
+	
+	int cards[4] = {0};
+	int i;
+	for (i = 0; i < 4; i++)
+	{
+		cards[i] = bound;
+		bound++;
+	}
+
+	// original -> h, s, d, c
+	// convert to
+	// desired -> c, d, h, s
+	swapcard(cards, 3, 0);
+	swapcard(cards, 3, 1);
+	swapcard(cards, 2, 1);
+
+	sprintf(path, "picture/%d.png", cards[pos]);
+	return path;
     /************CODE END***************/
 }
 
@@ -87,7 +108,7 @@ void add_image(int container_id, int card){
 void quit_game(GtkWindow *window){
     /************CODE HERE**************/
     // close the game
-
+	gtk_widget_destroy(GTK_WIDGET(window));
     /************CODE END***************/
 }
 
