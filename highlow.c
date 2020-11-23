@@ -146,7 +146,7 @@ void on_click_pass() {
 void on_click_hint(GtkWidget *widget, gpointer window) {
 	GtkDialogFlags flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT; // modal dialog to force user attention
 	GtkWidget *dialog;
-	char * buffer = malloc(100);
+	char * buffer = malloc(200);
 
 	int step = status[0];
 	int last_card = card_deck[step -1];
