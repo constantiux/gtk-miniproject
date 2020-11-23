@@ -146,12 +146,14 @@ void on_click_pass() {
 void on_click_hint(GtkWidget *widget, gpointer window) {
 	GtkDialogFlags flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT; // modal dialog to force user attention
 	GtkWidget *dialog;
+	char * buffer = malloc(100);
+	sprintf(buffer, "Testing message\nwith new line and number %d", 1);
 
 	dialog = gtk_message_dialog_new(GTK_WINDOW(window),
 									flags,
 									GTK_MESSAGE_INFO,
 									GTK_BUTTONS_OK,
-									"Download Completed");
+									buffer);
 	gtk_window_set_title(GTK_WINDOW(dialog), "Information");
 	gtk_dialog_run(GTK_DIALOG(dialog));
 	gtk_widget_destroy(dialog);
