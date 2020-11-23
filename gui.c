@@ -14,17 +14,9 @@ GtkWidget *button_higher;
 GtkWidget *button_lower;
 GtkWidget *button_new;
 GtkWidget *button_quit;
-GtkWidget *button_pass; //della
 //GtkWidget *button_hint;
 GtkWidget *text_prompt;
 GtkTextBuffer *buffer_prompt;
-
-void on_click_higher();
-void on_click_lower();
-//void on_click_hint();
-void new_game();
-
-
 
 
 void clear_child(GtkWidget* container){
@@ -50,17 +42,15 @@ void set_prompt(char * prompt){
 void show_ingame_buttons(){
     gtk_widget_show(button_higher);
     gtk_widget_show(button_lower);
+	gtk_widget_show(button_pass); // Extension part
     //gtk_widget_show(button_hint);
-	//della
-	gtk_widget_show(button_pass);
 }
 
 void hide_ingame_buttons(){
     gtk_widget_hide(button_higher);
     gtk_widget_hide(button_lower);
+	gtk_widget_show(button_pass); // Extension part
     //gtk_widget_hide(button_hint);
-	//della
-	gtk_widget_hide(button_pass);
 }
 
 void swap(int *a, int *b){
@@ -136,6 +126,7 @@ void activate (GtkApplication *app, gpointer user_data){
     gtk_container_set_border_width(GTK_CONTAINER(south_container), 20);
     button_higher = gtk_button_new_with_label ("Higher!");
     button_lower = gtk_button_new_with_label ("Lower!");
+	button_pass = gtk_button_new_with_label ("Pass"); // Extension part
     button_new = gtk_button_new_with_label ("New Game");
     button_quit = gtk_button_new_with_label ("Quit Game");
     //button_hint = gtk_button_new_with_label ("Hint");
@@ -151,6 +142,7 @@ void activate (GtkApplication *app, gpointer user_data){
 
     gtk_box_pack_start (GTK_BOX (button_container), button_higher, FALSE, FALSE, padding);
     gtk_box_pack_start (GTK_BOX (button_container), button_lower, FALSE, FALSE, padding);
+	gtk_box_pack_start (GTK_BOX (button_container), button_pass, FALSE, FALSE, padding); // Extension part
     gtk_box_pack_start (GTK_BOX (button_container), button_new, FALSE, FALSE, padding);
     gtk_box_pack_start (GTK_BOX (button_container), button_quit, FALSE, FALSE, padding);
     //gtk_box_pack_start (GTK_BOX (button_container), button_hint, FALSE, FALSE, padding);
@@ -160,6 +152,7 @@ void activate (GtkApplication *app, gpointer user_data){
     g_signal_connect (button_new, "clicked", G_CALLBACK (new_game), NULL);
     g_signal_connect (button_higher, "clicked", G_CALLBACK (on_click_higher), NULL);
     g_signal_connect (button_lower, "clicked", G_CALLBACK (on_click_lower), NULL);
+	g_signal_connect (button_pass, "clicked", G_CALLBACK (on_click_pass), NULL); // Extension part
     //g_signal_connect (button_hint, "clicked", G_CALLBACK (on_click_hint), NULL);
     gtk_text_buffer_set_text (buffer_prompt, "", -1);
 
