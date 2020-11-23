@@ -14,7 +14,7 @@ GtkWidget * button_lower;
 GtkWidget * button_pass; // Extension part
 GtkWidget * button_new;
 GtkWidget * button_quit;
-GtkWidget *button_hint; // Extension part
+GtkWidget * button_hint; // Extension part
 GtkWidget * text_prompt;
 GtkTextBuffer * buffer_prompt;
 
@@ -42,14 +42,14 @@ void show_ingame_buttons() {
     gtk_widget_show(button_higher);
     gtk_widget_show(button_lower);
     gtk_widget_show(button_pass); // Extension part
-    //gtk_widget_show(button_hint);
+    gtk_widget_show(button_hint); // Extension part
 }
 
 void hide_ingame_buttons() {
     gtk_widget_hide(button_higher);
     gtk_widget_hide(button_lower);
     gtk_widget_hide(button_pass); // Extension part
-    //gtk_widget_hide(button_hint);
+    gtk_widget_hide(button_hint); // Extension part
 }
 
 void swap(int * a, int * b) {

@@ -110,7 +110,7 @@ void higher_lower(int is_higher) {
 
     switch (is_higher) {
     case 0: // when player press "Lower" button
-        if (card_diff < 0) status[player + 1] += 10;
+        if (card_diff < 0) status[player + 1] += 10; // player +1 -> North = 1, South = 2
         else status[player + 1] -= 5;
         break;
     case 1: // when player press "Higher" button
@@ -147,7 +147,26 @@ void on_click_hint(GtkWidget *widget, gpointer window) {
 	GtkDialogFlags flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT; // modal dialog to force user attention
 	GtkWidget *dialog;
 	char * buffer = malloc(100);
-	sprintf(buffer, "Testing message\nwith new line and number %d", 1);
+
+	int step = status[0];
+	int last_card = card_deck[step -1];
+	int remaining = 52 - step;
+	int higher = 0;
+	int lower = 0;
+	
+	int i;
+	// compare all remaining cards with the last card
+	for (i = step + 1; i < 52; i ++){
+		if (card_deck[i] > last_card) higher++;
+		if (card_deck[i] < last_card) lower++;
+	}
+
+	sprintf(buffer, "Remaining cards: %d"
+					"No. of cards higher than opponent\'s last card: %d"
+					"No. of cards lower than opponent\'s last card: %d",
+					remaining,
+					higher,
+					lower);
 
 	dialog = gtk_message_dialog_new(GTK_WINDOW(window),
 									flags,
