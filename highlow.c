@@ -12,7 +12,7 @@ void higher_lower(int is_higher);
 void on_click_higher();
 void on_click_lower();
 void on_click_pass(); // Extension part
-//void on_click_hint();
+void on_click_hint(); // Extension part
 
 static int status[3]; // step, North's score, South's score
 static int card_deck[52];
@@ -143,6 +143,16 @@ void on_click_pass() {
     higher_lower(-1);
 }
 
-//void on_click_hint(){
-//    
-//}
+void on_click_hint(GtkWindow * window) {
+	GtkDialogFlags flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT; // modal dialog to force user attention
+	GtkWidget *dialog;
+
+	dialog = gtk_message_dialog_new(window,
+									flags,
+									GTK_MESSAGE_INFO,
+									GTK_BUTTONS_OK,
+									"Download Completed");
+	gtk_window_set_title(GTK_WINDOW(dialog), "Information");
+	gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_widget_destroy(dialog);    
+}

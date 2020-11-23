@@ -14,7 +14,7 @@ GtkWidget * button_lower;
 GtkWidget * button_pass; // Extension part
 GtkWidget * button_new;
 GtkWidget * button_quit;
-//GtkWidget *button_hint;
+GtkWidget *button_hint; // Extension part
 GtkWidget * text_prompt;
 GtkTextBuffer * buffer_prompt;
 
@@ -104,25 +104,25 @@ void add_image(int container_id, int card) {
 }
 
 void quit_game(GtkWindow * window) {
-	/************CODE HERE**************/
+    /************CODE HERE**************/
     // close the game
-	GtkDialogFlags flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
-	GtkWidget *dialog = gtk_message_dialog_new(window,
+	// This contains extended functionalities
+    GtkDialogFlags flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT; // modal dialog to force user attention
+    GtkWidget * dialog = gtk_message_dialog_new(window,
 												flags,
 												GTK_MESSAGE_QUESTION,
 												GTK_BUTTONS_YES_NO,
 												"Are you sure to quit?");
 
-	gtk_window_set_title(GTK_WINDOW(dialog), "Confirmation");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Confirmation");
 
-	int result = gtk_dialog_run (GTK_DIALOG (dialog));
-	switch (result)
-	{
+    int result = gtk_dialog_run(GTK_DIALOG(dialog)); // get response signal
+    switch (result) {
 		case GTK_RESPONSE_YES:
 			gtk_widget_destroy(dialog);
 			gtk_widget_destroy(GTK_WIDGET(window));
 			break;
-	}
+    }
     /************CODE END***************/
 }
 
@@ -148,7 +148,7 @@ void activate(GtkApplication * app, gpointer user_data) {
     button_pass = gtk_button_new_with_label("Pass"); // Extension part
     button_new = gtk_button_new_with_label("New Game");
     button_quit = gtk_button_new_with_label("Quit Game");
-    //button_hint = gtk_button_new_with_label ("Hint");
+    button_hint = gtk_button_new_with_label ("Hint"); // Extension part
     text_prompt = gtk_text_view_new();
     buffer_prompt = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_prompt));
 
@@ -164,7 +164,7 @@ void activate(GtkApplication * app, gpointer user_data) {
     gtk_box_pack_start(GTK_BOX(button_container), button_pass, FALSE, FALSE, padding); // Extension part
     gtk_box_pack_start(GTK_BOX(button_container), button_new, FALSE, FALSE, padding);
     gtk_box_pack_start(GTK_BOX(button_container), button_quit, FALSE, FALSE, padding);
-    //gtk_box_pack_start (GTK_BOX (button_container), button_hint, FALSE, FALSE, padding);
+    gtk_box_pack_start (GTK_BOX (button_container), button_hint, FALSE, FALSE, padding); // Extension part
     g_signal_connect_swapped(button_quit, "clicked", G_CALLBACK(quit_game), window);
     gtk_box_pack_start(GTK_BOX(info_container), text_prompt, FALSE, FALSE, padding);
 
@@ -172,7 +172,7 @@ void activate(GtkApplication * app, gpointer user_data) {
     g_signal_connect(button_higher, "clicked", G_CALLBACK(on_click_higher), NULL);
     g_signal_connect(button_lower, "clicked", G_CALLBACK(on_click_lower), NULL);
     g_signal_connect(button_pass, "clicked", G_CALLBACK(on_click_pass), NULL); // Extension part
-    //g_signal_connect (button_hint, "clicked", G_CALLBACK (on_click_hint), NULL);
+    g_signal_connect (button_hint, "clicked", G_CALLBACK(on_click_hint), NULL); // Extension part
     gtk_text_buffer_set_text(buffer_prompt, "", -1);
 
     gtk_widget_show_all(window);
