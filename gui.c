@@ -128,31 +128,6 @@ void quit_game(GtkWindow * window) {
     /************CODE END***************/
 }
 
-void show_confirm(GtkApplication * app, gpointer user_data) {
-	GtkWidget *dialog;
-	GtkDialogFlags flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
-	dialog = gtk_dialog_new_with_buttons ("My dialog",
-										main_app_window,
-										flags,
-										_("_OK"),
-										GTK_RESPONSE_ACCEPT,
-										_("_Cancel"),
-										GTK_RESPONSE_REJECT,
-										NULL);
-
-	int result = gtk_dialog_run (GTK_DIALOG (dialog));
-	switch (result)
-	{
-		case GTK_RESPONSE_ACCEPT:
-		// do_application_specific_something ();
-		break;
-		default:
-		// do_nothing_since_dialog_was_cancelled ();
-		break;
-	}
-	gtk_widget_destroy (dialog);
-}
-
 void activate(GtkApplication * app, gpointer user_data) {
     GtkWidget * window = gtk_application_window_new(app);
     gtk_window_set_title(GTK_WINDOW(window), "HighLow");
