@@ -1,5 +1,7 @@
 #include <time.h>
 #include <stdlib.h>
+#include <stdio.h>
+
 int add_new_card(int container_id, int step);
 char * get_prompt();
 void new_game();

@@ -50,18 +50,22 @@ void show_ingame_buttons(){
     gtk_widget_show(button_higher);
     gtk_widget_show(button_lower);
     //gtk_widget_show(button_hint);
+	//della
+	gtk_widget_show(button_pass);
 }
 
 void hide_ingame_buttons(){
     gtk_widget_hide(button_higher);
     gtk_widget_hide(button_lower);
     //gtk_widget_hide(button_hint);
+	//della
+	gtk_widget_hide(button_pass);
 }
 
-void swapcard(int *cards, int a, int b){
-	int tmp = *cards[a];
-	*array[a] = *card[b];
-	*array[b] = tmp;
+void swap(int *a, int *b){
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 char* get_image_path(int card){
@@ -82,9 +86,9 @@ char* get_image_path(int card){
 	// original -> h, s, d, c
 	// convert to
 	// desired -> c, d, h, s
-	swapcard(cards, 3, 0);
-	swapcard(cards, 3, 1);
-	swapcard(cards, 2, 1);
+	swap(&cards[3], &cards[0]);
+	swap(&cards[3], &cards[1]);
+	swap(&cards[2], &cards[1]);
 
 	sprintf(path, "picture/%d.png", cards[pos]);
 	return path;
