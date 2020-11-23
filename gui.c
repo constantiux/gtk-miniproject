@@ -12,6 +12,7 @@ GtkWidget *info_container;
 GtkWidget *south_container;
 GtkWidget *button_higher;
 GtkWidget *button_lower;
+GtkWidget *button_pass; // Extension part
 GtkWidget *button_new;
 GtkWidget *button_quit;
 //GtkWidget *button_hint;
