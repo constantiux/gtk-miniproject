@@ -107,7 +107,7 @@ void quit_game(GtkWindow * window) {
 	/************CODE HERE**************/
     // close the game
 	GtkWidget *dialog;
-	GtkDialogFlags flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
+	GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT;
 	dialog = gtk_dialog_new_with_buttons ("My dialog",
 										window,
 										flags,
