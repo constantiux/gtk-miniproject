@@ -172,7 +172,7 @@ void activate(GtkApplication * app, gpointer user_data) {
     g_signal_connect(button_higher, "clicked", G_CALLBACK(on_click_higher), NULL);
     g_signal_connect(button_lower, "clicked", G_CALLBACK(on_click_lower), NULL);
     g_signal_connect(button_pass, "clicked", G_CALLBACK(on_click_pass), NULL); // Extension part
-    g_signal_connect (button_hint, "clicked", G_CALLBACK(on_click_hint), NULL); // Extension part
+    g_signal_connect(button_hint, "clicked", G_CALLBACK(on_click_hint), (gpointer) window); // Extension part
     gtk_text_buffer_set_text(buffer_prompt, "", -1);
 
     gtk_widget_show_all(window);
