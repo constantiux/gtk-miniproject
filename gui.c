@@ -113,7 +113,7 @@ void quit_game(GtkWindow * window) {
 												GTK_BUTTONS_YES_NO,
 												"Are you sure to quit?");
 
-	gtk_window_set_title(GTK_WINDOW(dialog), "Question");
+	gtk_window_set_title(GTK_WINDOW(dialog), "Confirmation");
 
 	int result = gtk_dialog_run (GTK_DIALOG (dialog));
 	switch (result)
@@ -122,7 +122,7 @@ void quit_game(GtkWindow * window) {
 			gtk_widget_destroy(GTK_WIDGET(window));
 			break;
 	}
-	gtk_widget_destroy(GTK_WIDGET(dialog));
+	gtk_widget_destroy(dialog);
     /************CODE END***************/
 }
 
