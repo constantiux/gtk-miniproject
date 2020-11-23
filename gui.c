@@ -12,6 +12,7 @@ GtkWidget *info_container;
 GtkWidget *south_container;
 GtkWidget *button_higher;
 GtkWidget *button_lower;
+GtkWidget *button_pass; // Extension part
 GtkWidget *button_new;
 GtkWidget *button_quit;
 //GtkWidget *button_hint;
@@ -49,7 +50,7 @@ void show_ingame_buttons(){
 void hide_ingame_buttons(){
     gtk_widget_hide(button_higher);
     gtk_widget_hide(button_lower);
-	gtk_widget_show(button_pass); // Extension part
+	gtk_widget_hide(button_pass); // Extension part
     //gtk_widget_hide(button_hint);
 }
 
