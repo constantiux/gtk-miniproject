@@ -62,24 +62,27 @@ char * get_image_path(int card) {
     /************CODE HERE**************/
     char * path = malloc(20);
 
-    int bound = ((card / 4) * 4 + 4) % 52;
-    int pos = card % 4;
+    int bound = ((card / 4) * 4 + 4) % 52; // (0-3) -> 4, ..., (15-18) -> 16, ...,(48-51) -> 0
+    int pos = card % 4; // position of the "cards" array
 
-    int cards[4] = {
-        0
-    };
+    int cards[4] = {0};
+
     int i;
     for (i = 0; i < 4; i++) {
         cards[i] = bound;
         bound++;
     }
 
+	// e.g. card = 15, bound = 16, pos = 3
+	// original cards = [4, 5, 6, 7]
+	// swapped cards = [7, 6, 4, 5]
+
     // original -> h, s, d, c
     // convert to
     // desired -> c, d, h, s
-    swap( & cards[3], & cards[0]);
-    swap( & cards[3], & cards[1]);
-    swap( & cards[2], & cards[1]);
+    swap( & cards[3], & cards[0]); // swapped to c, s, d, h
+    swap( & cards[3], & cards[1]); // swapped to c, h, d, s
+    swap( & cards[2], & cards[1]); // swapped to c, d, h, s
 
     sprintf(path, "picture/%d.png", cards[pos]);
     return path;
@@ -101,10 +104,53 @@ void add_image(int container_id, int card) {
 }
 
 void quit_game(GtkWindow * window) {
-    /************CODE HERE**************/
+	/************CODE HERE**************/
     // close the game
-    gtk_widget_destroy(GTK_WIDGET(window));
+	GtkWidget *dialog;
+	GtkDialogFlags flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
+	dialog = gtk_dialog_new_with_buttons ("My dialog",
+										window,
+										flags,
+										_("_OK"),
+										GTK_RESPONSE_ACCEPT,
+										_("_Cancel"),
+										GTK_RESPONSE_REJECT,
+										NULL);
+
+	int result = gtk_dialog_run (GTK_DIALOG (dialog));
+	switch (result)
+	{
+		case GTK_RESPONSE_ACCEPT:
+			gtk_widget_destroy(GTK_WIDGET(window));
+			break;
+	}
+	gtk_widget_destroy (dialog);
     /************CODE END***************/
+}
+
+void show_confirm(GtkApplication * app, gpointer user_data) {
+	GtkWidget *dialog;
+	GtkDialogFlags flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
+	dialog = gtk_dialog_new_with_buttons ("My dialog",
+										main_app_window,
+										flags,
+										_("_OK"),
+										GTK_RESPONSE_ACCEPT,
+										_("_Cancel"),
+										GTK_RESPONSE_REJECT,
+										NULL);
+
+	int result = gtk_dialog_run (GTK_DIALOG (dialog));
+	switch (result)
+	{
+		case GTK_RESPONSE_ACCEPT:
+		// do_application_specific_something ();
+		break;
+		default:
+		// do_nothing_since_dialog_was_cancelled ();
+		break;
+	}
+	gtk_widget_destroy (dialog);
 }
 
 void activate(GtkApplication * app, gpointer user_data) {
