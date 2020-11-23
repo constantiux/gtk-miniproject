@@ -14,6 +14,7 @@ GtkWidget *button_higher;
 GtkWidget *button_lower;
 GtkWidget *button_new;
 GtkWidget *button_quit;
+GtkWidget *button_pass; //della
 //GtkWidget *button_hint;
 GtkWidget *text_prompt;
 GtkTextBuffer *buffer_prompt;
