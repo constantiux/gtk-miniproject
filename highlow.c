@@ -10,6 +10,7 @@ void new_game();
 void card_shuffle();
 void end_game();
 void higher_lower(int is_higher);
+void close_cheat(GtkWidget *widget, gpointer window);
 
 static int status[3];  // step, North's score, South's score
 static int card_deck[52];
@@ -204,8 +205,8 @@ void on_click_cheat() {
 	label = gtk_label_new(cheat_description);
 
 	close = gtk_button_new_with_label("Close");
-	g_signal_connect(close, "clicked", G_CALLBACK(close_cheat),
-			 NULL);
+	g_signal_connect_swapped(close, "clicked", G_CALLBACK(close_cheat),
+			 cheat);
 
 	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
@@ -217,6 +218,6 @@ void on_click_cheat() {
 	gtk_widget_show_all(cheat);
 }
 
-void close_cheat(GtkWindow *window){
+void close_cheat(GtkWidget *widget, gpointer window){
 	gtk_widget_destroy(GTK_WIDGET(window));
 }
