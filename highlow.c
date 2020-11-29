@@ -10,7 +10,7 @@ void new_game();
 void card_shuffle();
 void end_game();
 void higher_lower(int is_higher);
-void close_cheat(GtkWindow* window);
+void close_cheat(GtkWindow *window);
 
 static int status[3];  // step, North's score, South's score
 static int card_deck[52];
@@ -189,35 +189,35 @@ void on_click_cheat() {
 	cheat = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(cheat), GTK_WIN_POS_CENTER);
 	gtk_window_set_default_size(GTK_WINDOW(cheat), 280, 150);
-	gtk_window_set_title(GTK_WINDOW(cheat), "Next card is...");
-	//gtk_window_set_decorated(GTK_WINDOW(cheat), FALSE);
+	gtk_window_set_decorated(GTK_WINDOW(cheat), FALSE);
 	gtk_window_set_modal(GTK_WINDOW(cheat), TRUE);
 	gtk_window_set_resizable(GTK_WINDOW(cheat), FALSE);
 	gtk_container_set_border_width(GTK_CONTAINER(cheat), 0);
 
-	int next_card = card_deck[status[0]]; // the current step is "to be revealed" card
-	char *imagepath = get_image_path(next_card); // use function declared in gui.h
-	image = gtk_image_new_from_file(imagepath);
-	//gtk_container_add(GTK_CONTAINER(cheat), image);
+	char *cheat_description = malloc(30);
+	sprintf(cheat_description, "The next card will be:\n");
+	label = gtk_label_new(cheat_description);  // label component
 
-	char *cheat_description = malloc(50);
-	sprintf(cheat_description, "Your next card will be:\n");
-	label = gtk_label_new(cheat_description);
+	int next_card =
+	    card_deck[status[0]];  // the current step is "to be revealed" card
+	char *imagepath =
+	    get_image_path(next_card);	// use function declared in gui.h
+	image = gtk_image_new_from_file(imagepath);
 
 	close = gtk_button_new_with_label("Close");
 	g_signal_connect_swapped(close, "clicked", G_CALLBACK(close_cheat),
-			 cheat);
+				 cheat);
 
 	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(vbox), image, FALSE, FALSE, 1);
-	gtk_box_pack_start(GTK_BOX(vbox), close, FALSE, FALSE, 1);
-	//gtk_container_add(GTK_CONTAINER(cheat), label);
+	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE,
+			   0);	// add label to collection vbox
+	gtk_box_pack_start(GTK_BOX(vbox), image, FALSE, FALSE,
+			   1);	// add cheat card to collection vbox
+	gtk_box_pack_start(GTK_BOX(vbox), close, FALSE, FALSE,
+			   1);	// add close button to collection vbox
 	gtk_container_add(GTK_CONTAINER(cheat), vbox);
 
 	gtk_widget_show_all(cheat);
 }
 
-void close_cheat(GtkWindow* window){
-	gtk_widget_destroy(GTK_WIDGET(window));
-}
+void close_cheat(GtkWindow *window) { gtk_widget_destroy(GTK_WIDGET(window)); }
