@@ -183,7 +183,7 @@ void on_click_hint(GtkWidget *widget, gpointer window) {
 }
 
 void on_click_cheat() {
-	GtkWidget *cheat, *image, *label;
+	GtkWidget *cheat, *image, *label, *vbox;
 
 	cheat = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(cheat), GTK_WIN_POS_CENTER);
@@ -203,7 +203,7 @@ void on_click_cheat() {
 	sprintf(cheat_description, "Your next card will be:\n");
 	label = gtk_label_new(cheat_description);
 
-	vbox = gtk_vbox_new(FALSE, 0);
+	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(vbox), image, FALSE, FALSE, 1);
 	//gtk_container_add(GTK_CONTAINER(cheat), label);
