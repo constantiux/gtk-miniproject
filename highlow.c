@@ -16,6 +16,7 @@ static int status[3];  // step, North's score, South's score
 static int card_deck[52];
 const int rounds = 19;
 char prompt[100];
+char debug[100];  // to print to console
 
 // container_id = 0 for North, 1 for South
 int add_new_card(int container_id, int step) {
@@ -57,7 +58,9 @@ void new_game() {
 	    2;	// After two initial cards given, increment initial steps by two
 
 	show_ingame_buttons();	// show higher, lower, pass, etc. buttons
-	g_print("New game initialized.\n"); // print to console to debug
+
+	sprintf(debug, "New game initialized.\n");
+	g_print(debug);	 // debug to console
 }
 
 void card_shuffle() {
@@ -93,16 +96,17 @@ void end_game() {
 		sprintf(results,
 			"North wins.\nNorth's score : %d, South's score: %d",
 			status[1], status[2]);
-		g_print("Game ended. North wins.\n"); // debug to console
+		sprintf(debug, "Game ended. North wins.\n");
+		g_print(debug);	 // debug to console
 	} else {
 		sprintf(results,
 			"South wins.\nNorth's score : %d, South's score: %d",
 			status[1], status[2]);
-		g_print("Game ended. South wins.\n"); // debug to console
+		sprintf(debug, "Game ended. South wins.\n");
+		g_print(debug);	 // debug to console
 	}
 
 	set_prompt(results);  // update prompt with message in `results` array
-	
 }
 
 void higher_lower(int is_higher) {
@@ -118,35 +122,51 @@ void higher_lower(int is_higher) {
 	    last_card;	// negative only if current card is lower than last card
 	int player = step % 2;	// 0 for North, 1 for South
 
-	char *debug = malloc(100);
 	char north[] = "North";
 	char south[] = "South";
 
 	switch (is_higher) {
 		case 0:	 // when player press "Lower" button
-			if (card_diff < 0){
+			if (card_diff < 0) {
 				status[player + 1] +=
 				    10;	 // player +1 -> North = 1, South = 2
-				sprintf(debug, "%s chose \"Lower\" and gained 10 points.\n", (player == 0 ? north : south));
-				g_print(debug);}
-			else {
+				sprintf(debug,
+					"%s chose \"Lower\" and gained 10 "
+					"points.\n",
+					(player == 0 ? north : south));
+				g_print(debug);
+			} else {
 				status[player + 1] -= 5;
-				sprintf(debug, "%s chose \"Lower\" and lost 5 points.\n", (player == 0 ? north : south));
-				g_print(debug); }
+				sprintf(
+				    debug,
+				    "%s chose \"Lower\" and lost 5 points.\n",
+				    (player == 0 ? north : south));
+				g_print(debug);
+			}
 			break;
 		case 1:	 // when player press "Higher" button
-			if (card_diff > 0)
+			if (card_diff > 0) {
 				status[player + 1] += 10;
-			else
+				sprintf(debug,
+					"%s chose \"Higher\" and gained 10 "
+					"points.\n",
+					(player == 0 ? north : south));
+				g_print(debug);
+			} else {
 				status[player + 1] -= 5;
+				sprintf(
+				    debug,
+				    "%s chose \"Higher\" and lost 5 points.\n",
+				    (player == 0 ? north : south));
+				g_print(debug);
+			}
 			break;
 			// anything besides 0 or 1, e.g. "Pass" button will have
 			// no effect on scoreboard
 		default:
-			if (player)
-				g_print("South chose to pass.\n");
-			else
-				g_print("North chose to pass.\n");
+			sprintf(debug, "%s chose to pass.\n",
+				(player == 0 ? north : south));
+			g_print(debug);
 			break;
 	}
 
@@ -167,10 +187,15 @@ void on_click_lower() { higher_lower(0); }
 void on_click_pass() { higher_lower(-1); }
 
 void on_click_hint(GtkWidget *widget, gpointer window) {
+	char north[] = "North";
+	char south[] = "South";
+	sprintf(debug, "%s peeked a hint.\n",
+		(status[0] % 2 == 0 ? north : south));
+	g_print(debug);
+
 	GtkDialogFlags flags =
 	    GTK_DIALOG_MODAL |
-	    GTK_DIALOG_DESTROY_WITH_PARENT;  // modal dialog to force user
-					     // attention
+	    GTK_DIALOG_DESTROY_WITH_PARENT;  // modal to force user attention
 	GtkWidget *dialog;
 	char *buffer = malloc(200);
 
@@ -202,6 +227,12 @@ void on_click_hint(GtkWidget *widget, gpointer window) {
 }
 
 void on_click_cheat() {
+	char north[] = "North";
+	char south[] = "South";
+	sprintf(debug, "%s gave up and cheated.\n",
+		(status[0] % 2 == 0 ? north : south));
+	g_print(debug);
+
 	GtkWidget *cheat, *image, *label, *vbox, *close;
 
 	cheat = gtk_window_new(GTK_WINDOW_TOPLEVEL);

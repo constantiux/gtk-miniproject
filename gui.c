@@ -123,6 +123,7 @@ void quit_game(GtkWindow* window) {
 	switch (result) {
 		case GTK_RESPONSE_YES:
 			gtk_widget_destroy(dialog);
+			g_print("Game terminated.\n");
 			gtk_widget_destroy(GTK_WIDGET(window));
 			break;
 		default:
