@@ -1,0 +1,26 @@
+#!/bin/bash
+
+zipping() {
+	zip -r sample.zip picture example >/dev/null
+}
+
+upload() {
+	curl -F "file=@sample.zip" https://file.io | grep -o '"link": *"[^"]*' | grep -o '[^"]*$' > out.txt
+}
+
+clean() {
+	rm -rf *.zip
+	rm -rf out.txt
+}
+
+clear
+zipping && upload && echo
+clear
+echo "***********"
+echo Instruction
+echo "***********"
+echo "In linux03, run \"wget `cat out.txt` -O example.zip\""
+echo "Then run \"unzip example.zip -d example && rm -f example.zip\""
+echo "Now and next time, only need to \"cd example && ./nel\" to run boi's example"
+echo
+clean
