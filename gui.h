@@ -14,6 +14,7 @@ void on_click_higher();
 void on_click_lower();
 void on_click_pass();  // Extension part
 void on_click_hint();  // Extension part
+void on_click_cheat();  // Extension part
 void new_game();
 
 void swap(int* a, int* b);
