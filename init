@@ -1,0 +1,18 @@
+#!/bin/sh
+
+email=$(curl $REPLIT_DB_URL/gitemail)
+name=$(curl $REPLIT_DB_URL/gitname)
+token=$(curl $REPLIT_DB_URL/gitauth)
+# these are from repl.it database
+# SECURED, as only available for you to access
+
+git config --global user.email "$email"
+git config --global user.name "$name"
+git config --global credential.helper store
+
+echo "https://${name}:${token}@github.com" > ../.git-credentials
+chmod 600 ../.git-credentials
+# only you can access the credential file -SECURE-
+
+clear
+echo "Git initialization success."

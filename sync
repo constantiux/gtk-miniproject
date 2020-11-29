@@ -1,0 +1,26 @@
+#!/bin/bash
+
+zipping() {
+	zip -r project.zip picture *.c *.h Makefile >/dev/null
+}
+
+upload() {
+	curl -F "file=@project.zip" https://file.io | grep -o '"link": *"[^"]*' | grep -o '[^"]*$' > out.txt
+}
+
+clean() {
+	rm -rf *.zip
+	rm -rf out.txt
+}
+
+clear
+zipping && upload && echo
+clear
+echo "***********"
+echo Instruction
+echo "***********"
+echo "In linux03, run \"wget `cat out.txt` -O project.zip\""
+echo "Then run \"unzip -o project.zip -d project && rm -f project.zip\""
+echo "Now and next time, only need to \"cd project && make && ./main\" to run your project"
+echo
+clean
