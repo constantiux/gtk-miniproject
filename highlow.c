@@ -182,22 +182,26 @@ void on_click_hint(GtkWidget *widget, gpointer window) {
 	gtk_widget_destroy(dialog);
 }
 
-void on_click_cheat(GtkWidget *widget, gpointer windows) {
-	GtkWidget *window, *image;
+void on_click_cheat() {
+	GtkWidget *window, *image, *label;
+
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-	gtk_window_set_default_size(GTK_WINDOW(window), 300, 150);
-	gtk_window_set_title(GTK_WINDOW(window), "Next card is...");
+	gtk_window_set_default_size(GTK_WINDOW(window), 280, 150);
+	gtk_window_set_decorated(GTK_WINDOW(window), FALSE);
 	gtk_window_set_modal(GTK_WINDOW(window), TRUE);
 	gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
-	gtk_container_set_border_width(GTK_CONTAINER(window), 2);
+	gtk_container_set_border_width(GTK_CONTAINER(window), 0);
 
-	int step = status[0];
-	int next_card = card_deck[step];
-	char *file_name = get_image_path(next_card);
-
+	int next_card = card_deck[status[0]]; // the current step is "to be revealed" card
+	char *imagepath = get_image_path(next_card); // use function declared in gui.h
 	image = gtk_image_new_from_file(file_name);
 	gtk_container_add(GTK_CONTAINER(window), image);
+
+	char *description = malloc(50);
+	sprintf(description, "Your next card will be:\n")
+	label = gtk_label_new(description);
+	gtk_container_add(GTK_CONTAINER(window), label);
 
 	gtk_widget_show_all(window);
 }
