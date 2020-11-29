@@ -12,10 +12,11 @@ GtkWidget* info_container;
 GtkWidget* south_container;
 GtkWidget* button_higher;
 GtkWidget* button_lower;
-GtkWidget* button_pass;	 // Extension part
+GtkWidget* button_pass;		// Extension part
 GtkWidget* button_new;
 GtkWidget* button_quit;
-GtkWidget* button_hint;	 // Extension part
+GtkWidget* button_hint;		// Extension part
+GtkWidget* button_cheat;	// Extension part
 GtkWidget* text_prompt;
 GtkTextBuffer* buffer_prompt;
 
@@ -44,6 +45,7 @@ void show_ingame_buttons() {
 	gtk_widget_show(button_lower);
 	gtk_widget_show(button_pass);  // Extension part
 	gtk_widget_show(button_hint);  // Extension part
+	gtk_widget_show(button_cheat);  // Extension part
 }
 
 void hide_ingame_buttons() {
@@ -51,6 +53,7 @@ void hide_ingame_buttons() {
 	gtk_widget_hide(button_lower);
 	gtk_widget_hide(button_pass);  // Extension part
 	gtk_widget_hide(button_hint);  // Extension part
+	gtk_widget_hdie(button_cheat); // Extension part
 }
 
 void swap(int* a, int* b) {
@@ -151,6 +154,7 @@ void activate(GtkApplication* app, gpointer user_data) {
 	button_new = gtk_button_new_with_label("New Game");
 	button_quit = gtk_button_new_with_label("Quit Game");
 	button_hint = gtk_button_new_with_label("Hint");  // Extension part
+	button_hint = gtk_button_new_with_label("Cheat"); // Extension part
 	text_prompt = gtk_text_view_new();
 	buffer_prompt = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_prompt));
 
@@ -172,6 +176,8 @@ void activate(GtkApplication* app, gpointer user_data) {
 			   FALSE, padding);
 	gtk_box_pack_start(GTK_BOX(button_container), button_pass, FALSE, FALSE,
 			   padding);  // Extension part
+	gtk_box_pack_start(GTK_BOX(button_container), button_cheat, FALSE, FALSE,
+			   padding);  // Extension part
 	gtk_box_pack_start(GTK_BOX(button_container), button_new, FALSE, FALSE,
 			   padding);
 	gtk_box_pack_start(GTK_BOX(button_container), button_quit, FALSE, FALSE,
@@ -191,6 +197,8 @@ void activate(GtkApplication* app, gpointer user_data) {
 	g_signal_connect(button_pass, "clicked", G_CALLBACK(on_click_pass),
 			 NULL);	 // Extension part
 	g_signal_connect(button_hint, "clicked", G_CALLBACK(on_click_hint),
+			 (gpointer)window);  // Extension part
+	g_signal_connect(button_cheat, "clicked", G_CALLBACK(on_click_cheat),
 			 (gpointer)window);  // Extension part
 	gtk_text_buffer_set_text(buffer_prompt, "", -1);
 
