@@ -200,6 +200,9 @@ void activate(GtkApplication* app, gpointer user_data) {
 			 (gpointer)window);  // Extension part
 	g_signal_connect(button_cheat, "clicked", G_CALLBACK(on_click_cheat),
 			 NULL);  // Extension part
+	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(quit_game),
+			 NULL);
+
 	gtk_text_buffer_set_text(buffer_prompt, "", -1);
 
 	gtk_widget_show_all(window);
