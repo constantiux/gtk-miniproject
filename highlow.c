@@ -188,7 +188,8 @@ void on_click_cheat() {
 	cheat = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(cheat), GTK_WIN_POS_CENTER);
 	gtk_window_set_default_size(GTK_WINDOW(cheat), 280, 150);
-	gtk_window_set_decorated(GTK_WINDOW(cheat), FALSE);
+	gtk_window_set_title(GTK_WINDOW(cheat), "Next card is...");
+	//gtk_window_set_decorated(GTK_WINDOW(cheat), FALSE);
 	gtk_window_set_modal(GTK_WINDOW(cheat), TRUE);
 	gtk_window_set_resizable(GTK_WINDOW(cheat), FALSE);
 	gtk_container_set_border_width(GTK_CONTAINER(cheat), 0);
@@ -198,9 +199,12 @@ void on_click_cheat() {
 	image = gtk_image_new_from_file(imagepath);
 	gtk_container_add(GTK_CONTAINER(cheat), image);
 
-	char *description = malloc(50);
-	sprintf(description, "Your next card will be:\n");
-	label = gtk_label_new(description);
+	char *cheat_description = malloc(50);
+	sprintf(cheat_description, "Your next card will be:\n");
+	label = gtk_label_new(cheat_description);
+
+	//hbox = gtk_hbox_new(TRUE, 5);
+	//gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 1);
 	gtk_container_add(GTK_CONTAINER(cheat), label);
 
 	gtk_widget_show_all(cheat);
