@@ -124,15 +124,15 @@ void higher_lower(int is_higher) {
 
 	switch (is_higher) {
 		case 0:	 // when player press "Lower" button
-			if (card_diff < 0)
+			if (card_diff < 0){
 				status[player + 1] +=
 				    10;	 // player +1 -> North = 1, South = 2
 				sprintf(debug, "%s chose \"Lower\" and gained 10 points.\n", (player == 0 ? north : south));
-				g_print(debug);
-			else
+				g_print(debug);}
+			else {
 				status[player + 1] -= 5;
 				sprintf(debug, "%s chose \"Lower\" and lost 5 points.\n", (player == 0 ? north : south));
-				g_print(debug);
+				g_print(debug); }
 			break;
 		case 1:	 // when player press "Higher" button
 			if (card_diff > 0)
