@@ -57,6 +57,7 @@ void new_game() {
 	    2;	// After two initial cards given, increment initial steps by two
 
 	show_ingame_buttons();	// show higher, lower, pass, etc. buttons
+	g_print("New game initialized.\n"); // print to console to debug
 }
 
 void card_shuffle() {
@@ -92,13 +93,16 @@ void end_game() {
 		sprintf(results,
 			"North wins.\nNorth's score : %d, South's score: %d",
 			status[1], status[2]);
+		g_print("Game ended. North wins.\n"); // debug to console
 	} else {
 		sprintf(results,
 			"South wins.\nNorth's score : %d, South's score: %d",
 			status[1], status[2]);
+		g_print("Game ended. South wins.\n"); // debug to console
 	}
 
 	set_prompt(results);  // update prompt with message in `results` array
+	
 }
 
 void higher_lower(int is_higher) {
@@ -114,13 +118,21 @@ void higher_lower(int is_higher) {
 	    last_card;	// negative only if current card is lower than last card
 	int player = step % 2;	// 0 for North, 1 for South
 
+	char *debug = malloc(100);
+	char north[] = "North";
+	char south[] = "South";
+
 	switch (is_higher) {
 		case 0:	 // when player press "Lower" button
 			if (card_diff < 0)
 				status[player + 1] +=
 				    10;	 // player +1 -> North = 1, South = 2
+				sprintf(debug, "%s chose \"Lower\" and gained 10 points.\n", (player == 0 ? north : south));
+				g_print(debug);
 			else
 				status[player + 1] -= 5;
+				sprintf(debug, "%s chose \"Lower\" and lost 5 points.\n", (player == 0 ? north : south));
+				g_print(debug);
 			break;
 		case 1:	 // when player press "Higher" button
 			if (card_diff > 0)
