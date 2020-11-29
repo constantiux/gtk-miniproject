@@ -197,15 +197,17 @@ void on_click_cheat() {
 	int next_card = card_deck[status[0]]; // the current step is "to be revealed" card
 	char *imagepath = get_image_path(next_card); // use function declared in gui.h
 	image = gtk_image_new_from_file(imagepath);
-	gtk_container_add(GTK_CONTAINER(cheat), image);
+	//gtk_container_add(GTK_CONTAINER(cheat), image);
 
 	char *cheat_description = malloc(50);
 	sprintf(cheat_description, "Your next card will be:\n");
 	label = gtk_label_new(cheat_description);
 
-	//hbox = gtk_hbox_new(TRUE, 5);
-	//gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 1);
-	gtk_container_add(GTK_CONTAINER(cheat), label);
+	vbox = gtk_vbox_new(FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), image, FALSE, FALSE, 1);
+	//gtk_container_add(GTK_CONTAINER(cheat), label);
+	gtk_container_add(GTK_CONTAINER(cheat), vbox);
 
 	gtk_widget_show_all(cheat);
 }
