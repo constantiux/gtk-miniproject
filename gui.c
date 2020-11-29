@@ -53,7 +53,7 @@ void hide_ingame_buttons() {
 	gtk_widget_hide(button_lower);
 	gtk_widget_hide(button_pass);  // Extension part
 	gtk_widget_hide(button_hint);  // Extension part
-	gtk_widget_hdie(button_cheat); // Extension part
+	gtk_widget_hide(button_cheat); // Extension part
 }
 
 void swap(int* a, int* b) {
