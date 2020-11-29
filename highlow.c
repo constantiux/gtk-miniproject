@@ -92,6 +92,8 @@ void end_game() {
 	if (score == 0) {
 		sprintf(results, "Draw.\nNorth's score : %d, South's score: %d",
 			status[1], status[2]);
+		sprintf(debug, "Game ended with a tie!\n");
+		g_print(debug);	 // debug to console
 	} else if (score > 0) {
 		sprintf(results,
 			"North wins.\nNorth's score : %d, South's score: %d",
@@ -191,7 +193,7 @@ void on_click_hint(GtkWidget *widget, gpointer window) {
 	char south[] = "South";
 	sprintf(debug, "%s peeked a hint.\n",
 		(status[0] % 2 == 0 ? north : south));
-	g_print(debug);
+	g_print(debug);	 // debug to console
 
 	GtkDialogFlags flags =
 	    GTK_DIALOG_MODAL |

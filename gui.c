@@ -63,7 +63,7 @@ void swap(int* a, int* b) {
 }
 
 char* get_image_path(int card) {
-	char* path = malloc(20);
+	char* path = malloc(20);  // store the manipulated pathname
 
 	int bound = ((card / 4) * 4 + 4) %
 		    52;	     // (0-3) -> 4, ..., (15-18) -> 16, ...,(48-51) -> 0
@@ -117,17 +117,19 @@ void quit_game(GtkWindow* window) {
 	    gtk_message_dialog_new(window, flags, GTK_MESSAGE_QUESTION,
 				   GTK_BUTTONS_YES_NO, "Are you sure to quit?");
 
-	gtk_window_set_title(GTK_WINDOW(dialog), "Confirmation");
+	gtk_window_set_title(GTK_WINDOW(dialog),
+			     "Confirmation");  // set dialog title
 
 	int result = gtk_dialog_run(GTK_DIALOG(dialog));  // get response signal
 	switch (result) {
 		case GTK_RESPONSE_YES:
 			gtk_widget_destroy(dialog);
-			g_print("Game terminated.\n");
+			g_print("Game terminated.\n");	// debug to console
 			gtk_widget_destroy(GTK_WIDGET(window));
 			break;
 		default:
-			gtk_widget_destroy(dialog);
+			gtk_widget_destroy(dialog);  // only destroy dialog but
+						     // not parent window
 			break;
 	}
 }
