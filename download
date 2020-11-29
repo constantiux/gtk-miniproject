@@ -21,6 +21,6 @@ echo Instruction
 echo "***********"
 echo "In linux03, run \"wget `cat out.txt` -O example.zip\""
 echo "Then run \"unzip example.zip -d example && rm -f example.zip\""
-echo "Now and next time, only need to \"cd example && ./nel\" to run boi's example"
+echo "Now and next time, only need to \"cd example && ./example\" to run boi's example"
 echo
 clean
