@@ -10,6 +10,7 @@ void new_game();
 void card_shuffle();
 void end_game();
 void higher_lower(int is_higher);
+void close_cheat(GtkWindow *window);
 
 static int status[3];  // step, North's score, South's score
 static int card_deck[52];
