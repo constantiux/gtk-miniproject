@@ -151,10 +151,10 @@ void activate(GtkApplication* app, gpointer user_data) {
 	button_higher = gtk_button_new_with_label("Higher!");
 	button_lower = gtk_button_new_with_label("Lower!");
 	button_pass = gtk_button_new_with_label("Pass");  // Extension part
+	button_hint = gtk_button_new_with_label("Hint");  // Extension part
+	button_cheat = gtk_button_new_with_label("Cheat"); // Extension part
 	button_new = gtk_button_new_with_label("New Game");
 	button_quit = gtk_button_new_with_label("Quit Game");
-	button_hint = gtk_button_new_with_label("Hint");  // Extension part
-	button_hint = gtk_button_new_with_label("Cheat"); // Extension part
 	text_prompt = gtk_text_view_new();
 	buffer_prompt = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_prompt));
 
@@ -174,6 +174,8 @@ void activate(GtkApplication* app, gpointer user_data) {
 			   FALSE, padding);
 	gtk_box_pack_start(GTK_BOX(button_container), button_lower, FALSE,
 			   FALSE, padding);
+	gtk_box_pack_start(GTK_BOX(button_container), button_hint, FALSE, FALSE,
+			   padding);  // Extension part
 	gtk_box_pack_start(GTK_BOX(button_container), button_pass, FALSE, FALSE,
 			   padding);  // Extension part
 	gtk_box_pack_start(GTK_BOX(button_container), button_cheat, FALSE, FALSE,
@@ -182,8 +184,6 @@ void activate(GtkApplication* app, gpointer user_data) {
 			   padding);
 	gtk_box_pack_start(GTK_BOX(button_container), button_quit, FALSE, FALSE,
 			   padding);
-	gtk_box_pack_start(GTK_BOX(button_container), button_hint, FALSE, FALSE,
-			   padding);  // Extension part
 	g_signal_connect_swapped(button_quit, "clicked", G_CALLBACK(quit_game),
 				 window);
 	gtk_box_pack_start(GTK_BOX(info_container), text_prompt, FALSE, FALSE,
@@ -199,7 +199,7 @@ void activate(GtkApplication* app, gpointer user_data) {
 	g_signal_connect(button_hint, "clicked", G_CALLBACK(on_click_hint),
 			 (gpointer)window);  // Extension part
 	g_signal_connect(button_cheat, "clicked", G_CALLBACK(on_click_cheat),
-			 (gpointer)window);  // Extension part
+			 NULL);  // Extension part
 	gtk_text_buffer_set_text(buffer_prompt, "", -1);
 
 	gtk_widget_show_all(window);

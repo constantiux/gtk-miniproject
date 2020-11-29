@@ -10,10 +10,6 @@ void new_game();
 void card_shuffle();
 void end_game();
 void higher_lower(int is_higher);
-void on_click_higher();
-void on_click_lower();
-void on_click_pass();  // Extension part
-void on_click_hint();  // Extension part
 
 static int status[3];  // step, North's score, South's score
 static int card_deck[52];
