@@ -130,6 +130,12 @@ void higher_lower(int is_higher) {
 			break;
 			// anything besides 0 or 1, e.g. "Pass" button will have
 			// no effect on scoreboard
+		default:
+			if (player)
+				g_print("South chose to pass.\n");
+			else
+				g_print("North chose to pass.\n");
+			break;
 	}
 
 	if (status[0] == rounds) {
@@ -188,7 +194,7 @@ void on_click_cheat() {
 
 	cheat = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(cheat), GTK_WIN_POS_CENTER);
-	gtk_window_set_default_size(GTK_WINDOW(cheat), 280, 150);
+	gtk_window_set_default_size(GTK_WINDOW(cheat), 230, 150);
 	gtk_window_set_decorated(GTK_WINDOW(cheat), FALSE);
 	gtk_window_set_modal(GTK_WINDOW(cheat), TRUE);
 	gtk_window_set_resizable(GTK_WINDOW(cheat), FALSE);
