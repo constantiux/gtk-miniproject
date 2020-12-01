@@ -209,23 +209,24 @@ void on_click_hint(GtkWidget *widget, gpointer window) {
 
 	int i;
 	// compare all remaining cards with the last card
-	for (i = step + 1; i < 52; i++) {
+	for (i = step; i < 52; i++) {
 		if (card_deck[i] > last_card) higher++;
 		if (card_deck[i] < last_card) lower++;
 	}
 
 	sprintf(buffer,
 		"Remaining cards: %d\n"
-		"No. of cards higher than opponent\'s last card: %d\n"
-		"No. of cards lower than opponent\'s last card: %d",
-		remaining, higher, lower);
+		"No. of cards higher than %s\'s last card: %d\n"
+		"No. of cards lower than %s\'s last card: %d",
+		remaining, ((step - 1) % 2 == 0 ? north : south), higher,
+		((step - 1) % 2 == 0 ? north : south), lower);
 
 	dialog =
 	    gtk_message_dialog_new(GTK_WINDOW(window), flags, GTK_MESSAGE_INFO,
 				   GTK_BUTTONS_OK, buffer);
 	gtk_window_set_title(GTK_WINDOW(dialog), "Information");
 	gtk_dialog_run(GTK_DIALOG(dialog));
-	gtk_widget_destroy(dialog);
+	gtk_widget_destroy(dialog);  // destroy when closed
 }
 
 void on_click_cheat() {
@@ -266,9 +267,12 @@ void on_click_cheat() {
 			   1);	// add cheat card to collection vbox
 	gtk_box_pack_start(GTK_BOX(vbox), close, FALSE, FALSE,
 			   1);	// add close button to collection vbox
-	gtk_container_add(GTK_CONTAINER(cheat), vbox);
+	gtk_container_add(GTK_CONTAINER(cheat),
+			  vbox);  // show the collection container
 
 	gtk_widget_show_all(cheat);
 }
 
-void close_cheat(GtkWindow *window) { gtk_widget_destroy(GTK_WIDGET(window)); }
+void close_cheat(GtkWindow *window) {
+	gtk_widget_destroy(GTK_WIDGET(window));
+}  // close cheat window
